@@ -1,0 +1,61 @@
+<header class="app-header">
+  <div class="header-container">
+    <!-- Logo/Brand -->
+    <div class="logo">
+      <a routerLink="/">
+        <img src="assets/logomou9f.jpg" alt="Logo">
+        <span>MyApp</span>
+      </a>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="main-nav">
+      <ul>
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Home</a></li>
+        <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+        <li><a routerLink="/services" routerLinkActive="active">Services</a></li>
+        <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- User Menu / Actions -->
+    <div class="user-actions">
+      <!-- <ng-container *ngIf="isLoggedIn; else loginButtons">
+        <button class="user-menu" (click)="toggleUserMenu()">
+          <img [src]="userAvatar" alt="User">
+          <span>{{ userName }}</span>
+        </button>
+        <div class="dropdown-menu" *ngIf="showUserMenu">
+          <a routerLink="/profile">Profile</a>
+          <a routerLink="/settings">Settings</a>
+          <button >Logout</button>
+        </div>
+      </ng-container> -->
+      
+      <!-- <ng-template #loginButtons>
+        <button (click)="login()">Login</button>
+        <button routerLink="/signup" class="btn-primary">Sign Up</button>
+      </ng-template> -->
+      <div>
+        <button (click)="login()">Login</button>
+        <button routerLink="/signup" class="btn-primary">Sign Up</button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+      <span class="hamburger"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" *ngIf="showMobileMenu">
+    <ul>
+      <li><a routerLink="/" (click)="closeMobileMenu()">Home</a></li>
+      <li><a routerLink="/about" (click)="closeMobileMenu()">About</a></li>
+      <li><a routerLink="/services" (click)="closeMobileMenu()">Services</a></li>
+      <li><a routerLink="/contact" (click)="closeMobileMenu()">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
