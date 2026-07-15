@@ -1,0 +1,642 @@
+/* video-list.component.css - Header simplifié en ligne */
+
+/* ========== VARIABLES ========== */
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #818cf8;
+  --success: #10b981;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-600: #6b7280;
+  --gray-800: #1f2937;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+}
+
+/* Container principal */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #eaf1ff;
+}
+
+/* ========== HEADER SIMPLIFIÉ EN LIGNE ========== */
+.main-header {
+  background: linear-gradient(135deg, #ae7bdf 0%, #5c3f79 100%);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.main-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== BOUTON RETOUR SIMPLIFIÉ ========== */
+.back-home-btn {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.back-home-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-3px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* .btn-icon {
+  font-size: 1.1rem;
+} */
+
+/* .btn-text {
+  font-weight: 600;
+} */
+
+/* ========== PROFIL UTILISATEUR EN LIGNE ========== */
+/* CSS pour affichage en ligne */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 8px 24px 8px 12px;
+  border-radius: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.user-profile:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.02);
+}
+
+/* Avatar */
+.user-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-icon {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: white;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Détails en ligne */
+.user-details {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.user-name {
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.user-phone {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 12px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.user-phone:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Version responsive */
+@media (max-width: 768px) {
+  .user-profile {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .user-details {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-profile {
+    flex-direction: column;
+    text-align: center;
+    border-radius: 25px;
+    padding: 12px 20px;
+  }
+  
+  .user-details {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .user-name {
+    white-space: normal;
+  }
+  
+  .user-phone {
+    white-space: normal;
+  }
+}
+
+/* ========== TITRE PAGE ========== */
+.page-title {
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin-top: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-title h2 {
+  margin: 0 0 0px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #6f779e, #b399cc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.video-count {
+  display: inline-block;
+  background: var(--gray-100);
+  padding: 0px 16px;
+  border-radius: var(--radius-full);
+  font-size: 2rem;
+  font-weight: 600;
+  color: #3a0272;
+  margin: 0;
+}
+
+/* ========== GRILLE VIDÉOS ========== */
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .back-home-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .user-profile {
+    width: 100%;
+    justify-content: center;
+  }
+  
+ 
+  
+  .page-title h2 {
+    font-size: 1.5rem;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  .user-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+}
+
+.btn-video {
+  min-width: 70px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #8ca7c2;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-video i,
+.btn-video svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-image {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #8ca7c2;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 70px;
+
+}
+.btn-video:hover,
+.btn-image:hover{
+  background-color: #454d5e;
+}
+
+.btn-image i,
+.btn-image svg {
+  width: 18px;
+  height: 18px;
+}
+.header-spacer{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  backdrop-filter: blur(10px);
+  border-radius: 0px;
+  transition: all 0.3s ease;
+  
+}
+
+
+/* Style de base pour le conteneur */
+/* Style de base pour le conteneur - PLEINE LARGEUR */
+.clients-grid {
+    max-width: 100%;
+    margin-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Style principal de la carte client - PLEINE LARGEUR */
+.client-header {
+    background: linear-gradient(135deg, #a3acd6 0%, #9571b9 100%);
+    border-radius: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 100%;
+}
+
+/* Ligne de soulignement sous tout l'en-tête - PLEINE LARGEUR */
+.client-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #ffffff, #ffd700, #ff6b6b, #ffffff);
+    border-radius: 0;
+    animation: underlineSlide 0.8s ease-out;
+}
+
+/* Avatar du client */
+.client-avatar {
+    width: 46px;
+    height: 46px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.client-avatar:hover {
+    transform: scale(1.05);
+}
+
+/* Informations du client */
+.client-name {
+    flex: 1;
+}
+
+.client-name h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.5em;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Soulignement sous le titre - PLEINE LARGEUR */
+.client-name h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #ffd700, #ffffff, #ffd700);
+    border-radius: 2px;
+    animation: underlineSlide 0.6s ease-out;
+}
+
+.client-name p {
+    margin: 5px 0 0 0;
+    opacity: 0.8;
+    font-size: 1em;
+    margin-top: -3px;
+    padding-bottom: 2px;
+}
+
+/* Détails du client - PLEINE LARGEUR */
+.client-details {
+    background: white;
+    border-radius: 0;
+    padding: 25px 30px;
+    /* margin-right: 30px; */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-top: none;
+    position: relative;
+    /* width: 96%; */
+    gap: 20px;
+}
+
+/* Ligne de soulignement principale des détails */
+.client-details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+    animation: underlineSlide 0.8s ease-out;
+}
+
+/* Élément de détail individuel - PLEINE LARGEUR */
+.detail-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+    position: relative;
+    width: 100%;
+}
+
+/* Soulignement animé pour chaque item - PLEINE LARGEUR */
+.detail-item::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #ff6b6b);
+    transition: width 0.5s ease;
+}
+
+.detail-item:hover::after {
+    width: 100%;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item:hover {
+    background: linear-gradient(90deg, #f8f9ff, #ffffff);
+    padding-left: 15px;
+    border-radius: 8px;
+}
+
+/* Icônes */
+.detail-icon {
+    font-size: 1.3em;
+    width: 35px;
+    margin-right: 15px;
+}
+
+/* Labels */
+.detail-label {
+    font-weight: 600;
+    color: #555;
+    min-width: 100px;
+    font-size: 0.95em;
+    position: relative;
+}
+
+/* Valeurs */
+.detail-value {
+    color: #333;
+    font-size: 1em;
+    flex: 1;
+}
+
+/* Valeur en surbrillance */
+.detail-value.highlight {
+    color: #667eea;
+    font-weight: 600;
+    background: #f0f2ff;
+    padding: 5px 15px;
+    border-radius: 25px;
+    display: inline-block;
+}
+
+
+/* Animation de la ligne de soulignement */
+@keyframes underlineSlide {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+/* Animation d'entrée */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.client-header, .client-details {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.client-details {
+    animation-delay: 0.1s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+
+/* Responsive design - PLEINE LARGEUR */
+@media (max-width: 768px) {
+
+   .header-spacer{
+    width: 100%;
+    box-sizing: border-box;
+
+   }
+  .btn-video{
+    justify-content: center;
+    width: 100%;
+    margin-left: 12px;
+    margin-right: 0;
+  }
+  .btn-image{
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+
+  }
+   .user-profile{
+    border-radius: 0;
+   }
+    .client-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .client-avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 2.2em;
+    }
+    
+    .client-details {
+        padding: 20px;
+    }
+    
+    .detail-item {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 12px 0;
+    }
+    
+    .detail-label {
+        min-width: 85px;
+    }
+    
+    .detail-value {
+        font-size: 0.95em;
+    }
+    
+    .client-name h3 {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+
+    
+    .client-details {
+        padding: 15px;
+    }
+    
+    .detail-icon {
+        width: 30px;
+        font-size: 1.1em;
+    }
+    
+    .detail-label {
+        min-width: 75px;
+        font-size: 0.85em;
+    }
+    
+    .detail-value {
+        font-size: 0.9em;
+    }
+    
+}

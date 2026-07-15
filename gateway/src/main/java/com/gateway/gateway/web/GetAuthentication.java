@@ -1,40 +1,50 @@
 package com.gateway.gateway.web;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 @RestController
-@RequestMapping("/oauth2/resource")
+@RequestMapping("/gatewayMou9f")
 public class GetAuthentication {
-    @GetMapping("/auth")
-    public Map<String,Object> logoutSession(Authentication authentication) throws Exception {
+    @GetMapping("/user")
+    public ResponseEntity<String> logoutSession(Authentication authentication) throws Exception {
+        OAuth2AuthenticationToken authToken = (OAuth2AuthenticationToken) authentication;
+        return ResponseEntity.ok(authentication.getName());
+    }
 
-        return Map.of("auth",authentication);
+    @GetMapping("/token")
+    private Map<String,String> Token(@AuthenticationPrincipal OidcUser user) {
+        if (user != null) {
+            // Pour OIDC
+            String token =user.getIdToken().getTokenValue();
+            return Map.of("token",token);
+        }
+        return null;
     }
 
     @GetMapping("/getToken")
-    public String debugToken(Authentication authentication) {
-//        // L'annotation @AuthenticationPrincipal injecte directement le Principal
-//        if (user != null) {
-//            // Pour OIDC
-//            user.getAuthorities();
-//            return "Token: " + user.getIdToken().getTokenValue();
-//        }
-//        return "Non authentifié";
-//    }
-            if (authentication instanceof AuthenticatedPrincipal) {
-//            OidcUser auth = (OidcUser) authentication;
-                if (authentication.getPrincipal() instanceof DefaultOidcUser) {
-                    return ((DefaultOidcUser) authentication.getPrincipal()).getIdToken().getTokenValue();
-               }
-            }
-            return "";
+    private Map<String,OidcUser> extractIdToken(@AuthenticationPrincipal OidcUser user) {
+        if (user != null) {
+            // Pour OIDC
+           return Map.of("userinfo",user);
+            //return user.getIdToken()
+        }
+        return Map.of("user non othentifie",null);
     }
+
 }

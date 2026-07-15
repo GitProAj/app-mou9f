@@ -1,0 +1,256 @@
+/* ============================================
+   VARIABLES CSS
+   ============================================ */
+:root {
+    --primary: #4361ee;
+    --primary-light: #4895ef;
+    --primary-dark: #3f37c9;
+    --secondary: #4cc9f0;
+    --success: #4caf50;
+    --danger: #f44336;
+    --warning: #ff9800;
+    --info: #2196f3;
+    
+    --bg-primary: #f0f4ff;
+    --bg-card: #ffffff;
+    --bg-filter: #f8faff;
+    
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a6a;
+    --text-muted: #8888aa;
+    
+    --shadow-sm: 0 2px 8px rgba(67, 97, 238, 0.08);
+    --shadow-md: 0 4px 20px rgba(67, 97, 238, 0.12);
+    --shadow-lg: 0 8px 40px rgba(67, 97, 238, 0.16);
+    --shadow-xl: 0 12px 60px rgba(67, 97, 238, 0.2);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    --header-height: 70px;
+    --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* ============================================
+   LAYOUT PRINCIPAL
+   ============================================ */
+.container-app {
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    padding-top: calc(var(--header-height) + 20px);
+    font-family: inherit;
+    min-height: 100vh;
+}
+
+/* ============================================
+   EN-TÊTE (HEADER)
+   ============================================ */
+.app-header {
+    margin: 8px auto;
+    background: var(--header-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    max-width: 1280px;
+    backdrop-filter: blur(10px);
+    transition: transform var(--transition-base);
+}
+
+.app-header.scrolled {
+    transform: translateY(-100%);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    padding: 0 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* Logo */
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #0f0f0f;
+    font-weight: 700;
+    font-size: 1.5rem;
+    gap: 10px;
+    transition: opacity var(--transition-fast);
+}
+
+.logo a:hover {
+    opacity: 0.85;
+}
+
+.logo a img {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo span {
+    background: linear-gradient(135deg, #4cc9f0, #4361ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Navigation Desktop */
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav ul li a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.main-nav ul li a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.main-nav ul li a.active {
+    color: #ffffff;
+    background: rgba(76, 201, 240, 0.2);
+}
+
+.main-nav ul li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--secondary);
+    border-radius: 2px;
+}
+
+/* Actions Utilisateur */
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+.user-actions .btn-login,
+.user-actions .btn-signup {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+}
+
+.user-actions .btn-login {
+    background: rgba(255, 255, 255, 0.1);
+    color: #000000;
+}
+
+.user-actions .btn-login:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.user-actions .btn-signup {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: #000000;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+
+.user-actions .btn-signup:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(67, 97, 238, 0.4);
+}
+
+
+@media(max-width:768px){
+      .user-actions .btn-login,
+    .user-actions .btn-signup {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+    }
+ .app-header {
+        margin: 0;
+        border-radius: 0;
+        max-width: 100%;
+    }
+    
+    .header-container {
+        padding: 0 16px;
+        height: 60px;
+    }
+  }
+
+  @media(max-width:480px){
+      .user-actions .btn-login,
+    .user-actions .btn-signup {
+        padding: 4px 12px;
+        font-size: 0.75rem;
+    }
+     .logo a {
+        font-size: 1.2rem;
+    }
+    
+    .logo a img {
+        height: 36px;
+        width: 36px;
+    }
+  }

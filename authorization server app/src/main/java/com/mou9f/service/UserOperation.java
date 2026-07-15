@@ -2,6 +2,7 @@ package com.mou9f.service;
 
 import com.mou9f.dto.MessageDto;
 import com.mou9f.dto.UserDto;
+import com.mou9f.dto.UserResponse;
 import com.mou9f.entity.Role;
 import com.mou9f.entity.User;
 import com.mou9f.enums.RoleName;
@@ -26,12 +27,12 @@ public class UserOperation {
     @Autowired
     UserRepository userRepository;
 
-    public MessageDto createUser(UserDto userDto){
+    public UserResponse createUser(UserDto userDto){
         User user ;
         try {
             if(userRepository.findByUsername(userDto.getUsername()).isPresent())
             {
-                return new MessageDto("user exist");
+                return new UserResponse(userDto.getUsername(), true,"user exist dejat");
             }else{
                 user = new User();
                 user.setUsername(userDto.getUsername());
@@ -46,10 +47,10 @@ public class UserOperation {
                 );
                 user.setRoles(roles);
                 userRepository.save(user);
-                return new MessageDto("user created");
+                return new UserResponse(user.getUsername(), true,"user created");
             }
         }catch (Exception e){
-            return new MessageDto("user not created");
+            return new UserResponse("null",false,"user not created");
         }
     }
 

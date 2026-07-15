@@ -28,8 +28,16 @@ public class ResourceServerConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
         return http
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .anonymous(anonymous -> anonymous.disable()) // Rôle "invité" au lieu de "ANONYMOUS"
                 .csrf(c->c.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/open/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/error/**").permitAll()      // ← N'OUBLIEZ PAS
+                        .requestMatchers("/error").permitAll()      // ← N'OUBLIEZ PAS
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.decoder(JwtDecoders.fromIssuerLocation(issuerUri))))
                 .cors(cors->cors.configurationSource(corsConfigurationSource()))
@@ -58,55 +66,5 @@ public class ResourceServerConfig {
         return source;
     }
 
-//        @Bean
-        public CorsConfigurationSource acorsConfigurationSource() {
-            CorsConfiguration configuration = new CorsConfiguration();
 
-            // Autoriser la gateway (pas directement Angular)
-            configuration.setAllowedOrigins(Arrays.asList(
-                    "http://127.0.0.1:8081",  // URL de la gateway
-//                    "http://gateway:8080",
-                    "http://localhost:8081",
-                    "http://127.0.0.1:4200/home",
-                    "http://localhost:4200/home"   // Optionnel, mais pas recommandé
-            ));
-
-            configuration.setAllowedMethods(Arrays.asList(
-                    "GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
-            ));
-
-            configuration.setAllowedHeaders(Arrays.asList(
-                    "Authorization",
-                    "Content-Type",
-                    "X-Requested-With",
-                    "Accept",
-                    "Origin"
-            ));
-
-            configuration.setExposedHeaders(Arrays.asList(
-                    "Authorization",
-                    "Access-Control-Allow-Origin"
-            ));
-
-            configuration.setAllowCredentials(true);
-            configuration.setMaxAge(3600L);
-
-            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**", configuration);
-            return source;
-        }
-
-        // Alternative avec CorsFilter
-//        @Bean
-        public CorsFilter corsFilter() {
-            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            CorsConfiguration config = new CorsConfiguration();
-            config.setAllowCredentials(true);
-            config.addAllowedOrigin("http://localhost:8081");  // Gateway uniquement
-//            config.addAllowedOrigin("http://gateway:8080");
-            config.addAllowedHeader("*");
-            config.addAllowedMethod("*");
-            source.registerCorsConfiguration("/**", config);
-            return new CorsFilter(source);
-        }
 }

@@ -1,0 +1,571 @@
+/* Reset et styles de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Effet de fond animé */
+.container::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  animation: rotateBackground 20s linear infinite;
+}
+
+@keyframes rotateBackground {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Carte principale */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  padding: 25px;
+  max-width: 470px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* Badge décoratif */
+.card::before {
+  content: '✦';
+  position: absolute;
+  top: -12px;
+  right: 30px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Section WhatsApp */
+.whatsapp-section {
+  background: linear-gradient(145deg, #25d366, #128C7E);
+  border-radius: 20px;
+  padding: 25px 10px 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+}
+
+/* Effet de brillance sur WhatsApp */
+.whatsapp-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.whatsapp-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.whatsapp-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.whatsapp-section .text {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 22px;
+  line-height: 1.7;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.watssline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 60px;
+  padding: 14px 25px;
+  margin-bottom: 28px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.watssline:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.02);
+}
+
+.watssapimage {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.watssline .text {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 400;
+  text-shadow: none;
+}
+
+.numberwatss {
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 20px;
+  border-radius: 30px;
+  letter-spacing: 1.5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: 'Courier New', monospace;
+}
+
+/* Bouton WhatsApp */
+.whatsapp-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: white;
+  color: #25d366;
+  padding: 16px 40px;
+  border-radius: 60px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.whatsapp-link::before {
+  content: '📱';
+  margin-right: 8px;
+}
+
+.whatsapp-link::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.1);
+  transition: all 0.5s ease;
+  transform: translate(-50%, -50%);
+}
+
+.whatsapp-link:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+.whatsapp-link:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  background: #f8f9fa;
+}
+
+.whatsapp-link:active {
+  transform: scale(0.95);
+}
+
+/* Section Mètre */
+.meter-section {
+  background: linear-gradient(145deg, #f8fafc, #eef2f7);
+  border-radius: 20px;
+  padding: 25px 10px 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.meter-section::before {
+  content: '⚡';
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  font-size: 30px;
+  opacity: 0.1;
+}
+
+.meter-section .text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 22px;
+  letter-spacing: 0.5px;
+}
+
+.meter-section .text span {
+  color: #667eea;
+  font-weight: 800;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: white;
+  border-radius: 16px;
+  padding: 18px 22px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.line:hover {
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.line .text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 0;
+}
+
+.number {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #2d3748;
+  background: linear-gradient(135deg, #edf2f7, #e2e8f0);
+  padding: 6px 20px;
+  border-radius: 12px;
+  font-family: 'Courier New', 'Fira Code', monospace;
+  letter-spacing: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.number:hover {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Bouton Copier */
+.copy-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 14px 35px;
+  border-radius: 60px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.35);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.copy-link::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.5s ease;
+  transform: translate(-50%, -50%);
+}
+
+.copy-link:hover::after {
+  width: 400px;
+  height: 400px;
+}
+
+.copy-link:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 35px rgba(102, 126, 234, 0.45);
+  background: linear-gradient(135deg, #5a6fd6, #6a3f9e);
+}
+
+.copy-link:active {
+  transform: scale(0.95);
+}
+
+.copy-link::before {
+  content: '📋';
+  font-size: 1.1rem;
+}
+
+/* Animation d'apparition */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card {
+  animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Responsive Design amélioré */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+    min-height: 100vh;
+  }
+  
+  .card {
+    padding: 25px 20px;
+    border-radius: 24px;
+  }
+  
+  .card::before {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    top: -10px;
+    right: 20px;
+  }
+  
+  .whatsapp-section,
+  .meter-section {
+    padding: 25px 18px 22px;
+  }
+  
+  .whatsapp-section .text {
+    font-size: 1rem;
+  }
+  
+  .watssline {
+    padding: 10px 16px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .watssapimage {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .numberwatss {
+    font-size: 1.05rem;
+    padding: 4px 14px;
+  }
+  
+  .line {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+  
+  .number {
+    font-size: 1.15rem;
+    padding: 5px 16px;
+    letter-spacing: 2px;
+  }
+  
+  .whatsapp-link,
+  .copy-link {
+    padding: 13px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .card {
+    padding: 20px 15px;
+  }
+  
+  .whatsapp-section,
+  .meter-section {
+    padding: 20px 14px 18px;
+  }
+  
+  .whatsapp-section .text,
+  .meter-section .text {
+    font-size: 0.9rem;
+  }
+  
+  .numberwatss {
+    font-size: 0.95rem;
+  }
+  
+  .number {
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+  }
+  
+  .whatsapp-link::before {
+    content: '📱';
+    margin-right: 6px;
+    font-size: 0.9rem;
+  }
+  
+  .copy-link::before {
+    font-size: 0.9rem;
+  }
+}
+
+/* Support pour l'orientation paysage sur mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .container {
+    min-height: 100vh;
+    padding: 10px;
+  }
+  
+  .card {
+    padding: 20px;
+    max-width: 450px;
+  }
+  
+  .whatsapp-section,
+  .meter-section {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .whatsapp-section .text,
+  .meter-section .text {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+  
+  .watssline {
+    padding: 8px 14px;
+    margin-bottom: 15px;
+  }
+  
+  .line {
+    padding: 10px 14px;
+    margin-bottom: 15px;
+  }
+}
+
+/* Accessibilité - amélioration du focus */
+*:focus-visible {
+  outline: 3px solid #667eea;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Support Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: rgba(26, 32, 44, 0.95);
+    backdrop-filter: blur(20px);
+  }
+  
+  .meter-section {
+    background: linear-gradient(145deg, #2d3748, #1a202c);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .meter-section .text {
+    color: #e2e8f0;
+  }
+  
+  .line {
+    background: #2d3748;
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .line .text {
+    color: #a0aec0;
+  }
+  
+  .number {
+    background: linear-gradient(135deg, #4a5568, #2d3748);
+    color: #e2e8f0;
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .number:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+  }
+}
+
+/* Réduction des animations pour les personnes sensibles */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .card:hover {
+    transform: none !important;
+  }
+}

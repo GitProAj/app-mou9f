@@ -1,0 +1,172 @@
+<div class="container">
+  <div class="page-title">
+          <h2>Formulaire de Profil</h2>
+          <div *ngIf="successMessage" class="alert-success">
+            {{ successMessage }} 
+          </div>
+          <div *ngIf="messageeror" class="alert-success-error">
+            {{ messageeror }} 
+          </div>
+      <div class="form-action">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Nom *</label>
+              <input 
+                type="text" 
+                id="nom" 
+                formControlName="nom" 
+                class="form-control"
+                [class.is-invalid]="submitted && f['nom'].errors"
+                placeholder="Entrez votre nom">
+              
+              <!-- Messages d'erreur -->
+              <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">
+                <div *ngIf="f['nom'].errors['required']">Le nom est requis</div>
+                <div *ngIf="f['nom'].errors['minlength']">Le nom doit contenir au moins 2 caractères</div>
+                <div *ngIf="f['nom'].errors['maxlength']">Le nom ne peut pas dépasser 50 caractères</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="prenom">Prénom *</label>
+              <input 
+                type="text" 
+                id="prenom" 
+                formControlName="prenom" 
+                class="form-control"
+                [class.is-invalid]="submitted && f['prenom'].errors"
+                placeholder="Entrez votre prénom">
+              <div *ngIf="submitted && f['prenom'].errors" class="invalid-feedback">
+                <div *ngIf="f['prenom'].errors['required']">Le prénom est requis</div>
+                <div *ngIf="f['prenom'].errors['minlength']">Le prénom doit contenir au moins 2 caractères</div>
+                <div *ngIf="f['prenom'].errors['maxlength']">Le prénom ne peut pas dépasser 50 caractères</div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="username"> -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="username">username *</label>
+                <input 
+                  type="text" 
+                  id="username" 
+                  formControlName="username" 
+                  class="form-control"
+                  [class.is-invalid]="submitted && f['username'].errors"
+                  placeholder="Entrez votre username">
+                
+                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                  <div *ngIf="f['username'].errors['required']">L'email est requis</div>
+                  <div *ngIf="f['username'].errors['minlength']">Le nom doit contenir au moins 2 caractères</div>
+                  <div *ngIf="f['username'].errors['maxlength']">Le nom ne peut pas dépasser 50 caractères</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">mot de passe *</label>
+                <div class="form-row">
+                  <div class="form-group">
+                    <input 
+                      [type]="showPassword ? 'password' : 'text'" 
+                      id="password" 
+                      formControlName="password" 
+                      class="form-control-password"
+                      [class.is-invalid]="submitted && f['password'].errors"
+                      placeholder="***********"           
+                    >
+                    <button type="button" class="btn-hdden" (click)="showPass()">
+                      <i class="material-icons">
+                        {{ showPassword ? 'visibility_off' : 'visibility' }}
+                      </i>
+                    </button>
+                  </div>
+                
+                </div>
+                  <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors['required']">Le mot de passe est requis</div>
+                    <div *ngIf="f['password'].errors['pattern']">Le format doit être contient des chifre et des leter  (ex: 0123456789)</div>
+                  </div>
+              </div>   
+            </div>  
+          <!-- </div> -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ville">ville *</label>
+              <input
+              type="text"
+              id="ville"
+              formControlName="ville"
+              class="form-control"
+              [class.is-invalid]="submitted && f['ville'].errors"
+              placeholder="entrez votre ville"
+              >
+              <div *ngIf="submitted && f['ville'].errors" class="invalid-feedback">
+                <div *ngIf="f['ville'].errors['required']">La ville est requis</div>
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="ville">lieut d'activité *</label>
+              <input
+              type="text"
+              id="lieut"
+              formControlName="lieut"
+              class="form-control"
+              [class.is-invalid]="submitted && f['lieut'].errors"
+              placeholder="entrez votre lieut d'activité"
+              >
+              <div *ngIf="submitted && f['lieut'].errors" class="invalid-feedback">
+                <div *ngIf="f['lieut'].errors['required']">Le lieut est requis</div>
+              </div>
+
+            </div>
+          </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="metier">Métier *</label>
+            <select 
+              id="metier" 
+              formControlName="metier" 
+              class="form-control-select"
+              [class.is-invalid]="submitted && f['metier'].errors">
+              <option value="">Sélectionnez votre métier</option>
+              <option *ngFor="let profession of professions" [value]="profession">
+                {{ profession }}
+              </option>
+            </select>
+            
+            <div *ngIf="submitted && f['metier'].errors" class="invalid-feedback">
+              <div *ngIf="f['metier'].errors['required']">Le métier est requis</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="Telephone">Numéro de Téléphone *</label>
+            <input 
+              type="text" 
+              id="Telephone" 
+              formControlName="Telephone" 
+              class="form-control"
+              [class.is-invalid]="submitted && f['Telephone'].errors"
+              placeholder="0623456789">
+            
+            <div *ngIf="submitted && f['Telephone'].errors" class="invalid-feedback">
+              <div *ngIf="f['Telephone'].errors['required']">Le numéro de téléphone est requis</div>
+              <div *ngIf="f['Telephone'].errors['pattern']">Le format doit être 10 chiffres (ex: 0623456789)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" [disabled]="submitted">
+                {{ submitted ? 'Enregistrement...' : 'Enregistrer' }}
+          </button>
+          
+          <button type="button" class="btn btn-secondary" (click)="resetForm()">
+            Réinitialiser
+          </button>     
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

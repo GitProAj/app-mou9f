@@ -1,12 +1,16 @@
 package com.mou9f.entity;
 
+import com.mou9f.enums.SubscriptionStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
+
+import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.enabled;
 
 
 @Entity
@@ -16,6 +20,37 @@ import java.util.Set;
 @Setter
 @Builder
 public class User implements UserDetails {
+
+//    @Override
+//    public boolean isEnabled() {
+//        return enabled && isSubscriptionValid();
+//    }
+//
+//    public boolean isSubscriptionValid() {
+//        if (!subscriptionActive) return false;
+//
+//        if (trialPeriod && trialEndDate != null) {
+//            return LocalDateTime.now().isBefore(trialEndDate);
+//        }
+//
+//        if (subscriptionEndDate != null) {
+//            return LocalDateTime.now().isBefore(subscriptionEndDate);
+//        }
+//
+//        return false;
+//    }
+
+//    public boolean hasAccessToFeature(String feature) {
+//        if (!isSubscriptionValid()) return false;
+//
+//        return switch (subscriptionPlan) {
+//            case "BASIC" -> Set.of("read", "basic").contains(feature);
+//            case "PREMIUM" -> Set.of("read", "write", "premium").contains(feature);
+//            case "ENTERPRISE" -> true;
+//            default -> false;
+//        };
+//    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -25,43 +60,23 @@ public class User implements UserDetails {
     @JoinTable(name = "uesr-role-name",
             joinColumns = @JoinColumn(name="user-column"),
             inverseJoinColumns = @JoinColumn(name="role-column")
-        )
+    )
     private Set<Role> roles;
 
     private boolean expired=false;
     private boolean locked=false;
     private boolean credentialExpired=false;
-    private boolean disabled=false;
-
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public String getUsername() {
-//        return username;
-//    }
-
+    private boolean enabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
     }
 
-//    @Override
-//    public String getPassword() {
-//        return "";
-//    }
-//
-//    @Override
-//    public String getUsername() {
-//        return "";
-//    }
-
     @Override
     public boolean isAccountNonExpired() {
         return !expired;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return !locked;
@@ -74,6 +89,21 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return !disabled;
+        return enabled;
     }
+//    // Gestion de l'abonnement
+//    @Column(nullable = false)
+//    private boolean subscriptionActive = false;
+    @Column
+    private LocalDateTime subscriptionStartDate;
+    @Column
+    private LocalDateTime subscriptionEndDate;
+    @Column
+    private boolean trialPeriod = true;
+    @Column
+    private LocalDateTime trialEndDate;
+
 }
+
+
+

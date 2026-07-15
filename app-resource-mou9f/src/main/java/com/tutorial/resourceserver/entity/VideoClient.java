@@ -16,10 +16,12 @@ public class VideoClient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+//    @ManyToMany(fetch = FetchType.EAGER)
+    private long idClient;
     private String titre;
     private String description;
     // Pour stocker le chemin du fichier vidéo
-    private String cheminVideo;
+//    private String cheminVideo;
     // Pour stocker la vidéo directement dans la BDD (BLOB)
     @Lob
     @Column(columnDefinition = "LONGBLOB")

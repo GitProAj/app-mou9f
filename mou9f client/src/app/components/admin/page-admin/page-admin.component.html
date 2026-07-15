@@ -1,1 +1,84 @@
-<p>page-admin works!</p>
+<div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="title">📋 Liste des Clients</h1>
+          <div class="stats" *ngIf="!loading && clients.length > 0">
+            {{ clients.length }} client(s) trouvé(s)
+          </div>
+        </div>
+
+        <!-- Loading -->
+        <div *ngIf="loading" class="loading">
+          <div class="spinner"></div>
+          <p>Chargement des clients...</p>
+        </div>
+
+        <!-- Error -->
+        <div *ngIf="error" class="error">
+          <span class="error-icon">⚠️</span>
+          <span>{{ error }}</span>
+        </div>
+
+        <!-- Table -->
+        <div *ngIf="!loading && clients.length > 0" class="table-responsive">
+          <table class="client-table">
+            <thead>
+              <tr>
+                <th>👤 Prénom</th>
+                <th>👤 Nom</th>
+                <th>📧 Username</th>
+                <th>📍 Ville</th>
+                <th>📍 Lieu</th>
+                <th>📞 Téléphone</th>
+                <th>💼 Activité</th>
+                <th> Statut</th>
+                <th> Trial</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of clients">
+                <td data-label="Prénom">{{ client.firstname }}</td>
+                <td data-label="Nom">{{ client.lastname }}</td>
+                <td data-label="Username">{{ client.username }}</td>
+                <td data-label="Ville">{{ client.ville_activite }}</td>
+                <td data-label="Lieu">{{ client.lieut_activite }}</td>
+                <td data-label="Téléphone">{{ client.phone }}</td>
+                <td data-label="Activité">
+                  <span class="badge">{{ client.activite }}</span>
+                </td>
+             
+                <td *ngIf="client.enabled">
+                  <button (click)="updateStatu(client.enabled , client.username)"  class="btn-active">
+                     <div class="active">activé</div>
+                    <div class="disactive">disactivé</div>
+                  </button>
+                </td>
+                <td *ngIf="!client.enabled">
+                  <button (click)="updateStatu(client.enabled , client.username)" class="btn-disactive">
+                    <div class="active">activé</div>
+                    <div class="disactive">disactivé</div>
+                  </button>
+                </td>
+                 <td *ngIf="client.trialPeriod">
+                  <button class="btn-test">
+                    test
+                  </button>
+                </td>
+                <td *ngIf="!client.trialPeriod">
+                  <button class="btn-disactive">pré</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- No data -->
+        <div *ngIf="!loading && !error && clients.length === 0" class="no-data">
+          <div class="no-data-icon">📭</div>
+          <p>Aucun client trouvé</p>
+        </div>
+      </div>
+    </div>
+
+    

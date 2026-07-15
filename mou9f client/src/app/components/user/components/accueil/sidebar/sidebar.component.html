@@ -1,0 +1,67 @@
+
+
+  <!-- petit message indicatif (modernisé) -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="fr">
+<head> -->
+  <!-- <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hraifi · Header Moderne</title> -->
+  <!-- Font Awesome 6 (version gratuite) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ <div class="container">
+  <header class="main-header">
+    <!-- gauche : logo -->
+    <div class="header-left">
+      <div class="logo">
+        <div class="logo-img-text">
+          <!-- Logo SVG (light) -->
+          <svg class="logo-img" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="14" fill="#1e293b" />
+            <path d="M12 12L20 28L28 12H24L20 22L16 12H12Z" fill="white" fill-opacity="0.9" />
+            <circle cx="30" cy="28" r="4" fill="#a78bfa" />
+          </svg>
+          <span class="logo-text">Hraifi</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- navigation -->
+    <nav class="header-nav" role="navigation">
+      <ul class="nav-menu">
+       <li class="nav-item" *ngFor="let item of menuItems">
+          <a class="nav-link"
+             (click)="setActive(item)" 
+             [class.active]="item.active"
+             role="menuitem">
+            <i [class]="item.class"></i>
+            <span class="label">{{item.label}}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- droite : user + logout -->
+    <div class="header-right">
+      <div class="user-info">
+        <span class="user-name">Admin</span>
+        <div class="user-avatar"><i class="fas fa-user"></i></div>
+      </div>
+      <a (click)="logout()" class="logout-link">
+        <span class="span-deconecte">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Déconnexion</span>
+        </span>
+      </a>
+    </div>
+  </header>
+</div>
+  <!-- petit message indicatif (modernisé) -->
+  <!-- <div class="page-content">
+    <i class="fas fa-sparkles"></i>
+    <span>Header ultra-modern · verre flouté · animations fluides · responsive</span>
+    <i class="fas fa-sparkles"></i>
+  </div> -->
+

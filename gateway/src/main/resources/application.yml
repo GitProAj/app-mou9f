@@ -1,3 +1,41 @@
+#server:
+#  port: 8081
+#spring:
+#  application:
+#    name: gateway
+#  cloud:
+#    gateway:      default-filters:
+#        - name: TokenRelay
+#          args:
+#            # Important : ne pas déclencher la redirection OAuth pour les appels API
+#            headers:
+#              X-Requested-With: XMLHttpRequest
+##        - TokenRelay=
+#      routes:
+#        - id: route1
+#          uri: http://localhost:8080/
+#          predicates:
+#
+#
+#        - id: angular
+#          uri: http://127.0.0.1:4200/
+#          predicates:
+#            - Path=/**
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          gateway:
+#            provider: spring
+#            client-id: client1
+#            client-secret: secret
+#            scope: openid, profile
+#            authorization-grant-type: authorization_code
+#            redirect-uri: http://127.0.0.1:8081/login/oauth2/code/gateway
+#        provider:
+#          spring:
+#            issuer-uri: http://localhost:9000
+
 server:
   port: 8081
 spring:
@@ -5,78 +43,20 @@ spring:
     name: gateway
   cloud:
     gateway:
-#      globalcors:
-#        cors-configurations:
-#          '[/**]': # Pour toutes les routes API
-#            allowedOrigins:
-#              - "http://localhost:4200/home"
-#              - "http://127.0.0.1:4200/home"
-#              - "http://localhost:8081"
-#              - "http://127.0.0.1:8081"# La gateway elle-même
-#            allowedMethods:
-#              - "GET"
-#              - "POST"
-#              - "PUT"
-#              - "DELETE"
-#              - "PATCH"
-#              - "OPTIONS"
-#            allowedHeaders:
-#              - "Authorization"
-#              - "Content-Type"
-#              - "X-Requested-With"
-#              - "Accept"
-#              - "Origin"
-#              - "Access-Control-Request-Method"
-#              - "Access-Control-Request-Headers"
-#            exposedHeaders:
-#              - "Authorization"
-#              - "Access-Control-Allow-Origin"
-#              - "Access-Control-Allow-Credentials"
-#            allowCredentials: true
-#            maxAge: 3600
-      spring:
       default-filters:
         - TokenRelay=
       routes:
-#        - id: auth-server
-#          uri: http://localhost:9000/
-#          predicates:
-#            - Path=/logout/**
-#            - Method=POST GET
-#          filters:
-#            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
-#            - AddResponseHeader=Access-Control-Allow-Origin, http://127.0.0.1:8081
-#            - AddResponseHeader=Access-Control-Allow-Credentials, true
+
         - id: route1
           uri: http://localhost:8080/
           predicates:
-            - Path=/api/videos/**
-            - Method=POST,GET,DELETE
+            - Path=/api/resource/**,/api/videos/**,/open/**
+            - Method=POST,GET,DELETE,PUT
 
         - id: angular
-          uri: http://localhost:4200/
+          uri: http://127.0.0.1:4200/
           predicates:
             - Path=/**
-#          filters:
-##            - StripPrefix=1
-#            - TokenRelay=
-#            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
-#            - name: AddResponseHeader
-#              args:
-#                name: Access-Control-Allow-Origin
-#                value: "http://localhost:4200/home"
-#            - name: AddResponseHeader
-#              args:
-#                name: Access-Control-Allow-Credentials
-#                value: "true"
-#            - name: AddResponseHeader
-#              args:
-#                name: Access-Control-Allow-Methods
-#                value: "GET, POST, PUT, DELETE, OPTIONS"
-#            - name: AddResponseHeader
-#              args:
-#                name: Access-Control-Allow-Headers
-#                value: "Authorization, Content-Type, X-Requested-With"
   security:
     oauth2:
       client:
@@ -87,7 +67,7 @@ spring:
             client-secret: secret
             scope: openid, profile
             authorization-grant-type: authorization_code
-            redirect-uri: http://127.0.0.1:8081/login/oauth2/code/gateway/home/accueil
+            redirect-uri: http://127.0.0.1:8081/login/oauth2/code/gateway
         provider:
           spring:
-            issuer-uri: http://127.0.0.1:9000
+            issuer-uri: http://localhost:9000

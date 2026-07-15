@@ -1,0 +1,30 @@
+<!-- Version simplifiée pour Angular avec les données directes -->
+<div class="container">
+  <div class="card">
+    
+    <div class="meter-section">
+        <div class="text"> إشراك لمدة عام  فقط ب 100 درهم</div>
+        <div class="line">
+            <div class="text">🔢 Numéro de compte : </div>
+            <div class="number">
+                {{ meterNumber }}
+            </div>
+        </div>       
+        <button (click)="copyMeterNumber()" class="copy-link">
+           Copier le numéro
+        </button>
+    </div>
+
+    <div class="whatsapp-section">
+        <div class="text"> أرسل لنا التوصيل عبر الواتساب لتفعيل حسابك </div>
+        <div class="watssline">
+            <img src="assets/watssap.png" class="watssapimage" alt="logo">
+            <div class="text"> WhatsApp :</div>
+            <div class="numberwatss">0680253303</div>
+        </div>  
+        <a (click)="sendQuickMessage()" target="_blank" class="whatsapp-link">
+            Envoyer un message
+        </a>
+    </div>
+  </div>
+</div>

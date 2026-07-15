@@ -1,28 +1,49 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UploadVideoComponent } from './components/video/upload-video/upload-video.component';
-import { PageClientComponent } from './components/client/page-client/page-client.component';
-import { AccueilComponent } from './components/accueil/accueil.component';
+import { UploadVideoComponent } from './components/user/components/upload-video/upload-video.component';
+import { PageClientComponent } from './components/user/components/accueil/page-client/page-client.component';
+import { AccueilComponent } from './components/client/accueil/accueil.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { SidebarComponent } from './components/client/sidebar/sidebar.component';
-import { AddClientComponent } from './components/add-client/add-client.component';
+import { SidebarComponent } from './components/user/components/accueil/sidebar/sidebar.component';
+import { AddClientComponent } from './components/signup/add-client/add-client.component';
+import { AcheteComponent } from './components/signup/achete/achete.component';
+import { PageAdminComponent } from './components/admin/page-admin/page-admin.component';
+import { DetailclientComponent } from './components/client/detailclient/detailclient.component';
+import { UploadImageComponent } from './components/user/components/upload-image/upload-image.component';
+import { PageImagesVideosComponent } from './components/client/page-images-videos/page-images-videos.component';
+import { AppComponent } from './app.component';
+import { roleGuard } from './components/auth/guard/user-guard.guard';
 
 const routes: Routes = [
-  // {
-  //   path:'',
-  //     children:[
-  //       {path : 'video',component:UploadVideoComponent},
-  //       {path : "client",component:PageClientComponent}
-  //     ]
-  // }
-        {path : 'login',component:SidebarComponent},
-        {path : 'sidbar',component:SidebarComponent},
-        {path : 'accueil',component:AccueilComponent},
-        // {path : 'video',component:UploadVideoComponent},
-        {path : "client",component:PageClientComponent},
-        {path : "logout",component:LogoutComponent},
-        {path : "signup", component:AddClientComponent},
-        {path : "dashbord", component:PageClientComponent}
+  {
+    path:'home',
+       children:[
+          //  {
+            // path: 'login',
+            // redirectTo: window.location.href = '/oauth2/authorization/gateway',
+            // pathMatch: 'full'
+            // },
+            {path:'signup',component:AddClientComponent},
+            {path :'achete',component:AcheteComponent},
+            {path : 'accueil',component:AccueilComponent},
+            {path : 'detail/client/:id',component:DetailclientComponent},   
+            { 
+              path : 'client',component:PageClientComponent,
+              canActivate:[roleGuard],
+                  data:{
+                      roles:['USER']
+                  },
+            },
+            {
+              path : "admin",component:PageAdminComponent,
+              canActivate:[roleGuard],
+                  data:{
+                      roles:['USER']
+                  },
+            },
+      ]
+
+  }   
 
 ];
 

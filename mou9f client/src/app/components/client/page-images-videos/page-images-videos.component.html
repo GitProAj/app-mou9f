@@ -1,0 +1,131 @@
+<div class="container">
+  <div *ngIf="menuimgvideo.showVideo">
+    <div class="page-title">
+      <h2>📹 {{ videos.length }} Vidéos</h2>
+    </div>
+    <!-- <h2>📹 Mes Vidéos</h2> -->
+
+    <!-- Chargement -->
+    <div *ngIf="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Chargement des vidéos...</p>
+    </div>
+
+    <!-- Erreur -->
+    <div *ngIf="error" class="error">
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- Liste des vidéos avec pagination -->
+    <div *ngIf="!loading && videos.length > 0">
+
+      <!-- Grille des vidéos - 3 par ligne -->
+      <div class="videos-grid">
+        <div *ngFor="let video of videos" class="video-card">
+
+          <!-- Lecteur vidéo -->
+          <video *ngIf="getVideoUrl(video.id)" controls [src]="getVideoUrl(video.id)" class="video-player">
+          </video>
+
+          <!-- Infos vidéo -->
+          <div class="video-info">
+            <h3>{{ video.titre }}</h3>
+            <p>{{ video.description }}</p>
+            <div class="meta">
+              <!-- <span>📁 {{ video.description }}</span> -->
+              <span>💾 {{ formatFileSize(video.tailleVideo) }}</span>
+              <span>👤 {{ video.idClient }}</span>
+              <button *ngIf="menuimgvideo.userRole" (click)="deleteVideo(video.id)">suprimer</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Boutons de navigation -->
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button class="nav-btn" (click)="previousPage()" [disabled]="currentPage === 0">
+          ← Précédent
+        </button>
+
+        <span class="page-info">
+          Page {{ currentPage + 1 }} / {{ totalPages }}
+        </span>
+
+        <button class="nav-btn" (click)="nextPage()" [disabled]="currentPage === totalPages - 1">
+          Suivant →
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Aucune vidéo -->
+    <div *ngIf="!loading && videos.length === 0" class="empty">
+      <p>Aucune image trouvée</p>
+    </div>
+  </div>
+
+  <div *ngIf="menuimgvideo.showImage">
+    <div class="page-title">
+      <h2>📹 {{ images.length }} Images</h2>
+    </div>
+
+    <!-- Chargement -->
+    <div *ngIf="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Chargement des images...</p>
+    </div>
+
+    <!-- Erreur -->
+    <div *ngIf="error" class="error">
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- Liste des vidéos avec pagination -->
+    <div *ngIf="!loading && images.length > 0">
+
+      <!-- Grille des vidéos - 3 par ligne -->
+      <div class="videos-grid">
+        <div *ngFor="let image of images" class="video-card">
+
+          <!-- Lecteur vidéo -->
+          <img *ngIf="getImageUrl(image.id)" [src]="getImageUrl(image.id)" class="video-player">
+
+          <!-- Infos vidéo -->
+          <div class="video-info">
+            <h3>{{ image.title }}</h3>
+            <p>{{ image.description }}</p>
+            <div class="meta">
+              <!-- <span>📁 {{ image.description }}</span> -->
+              <span>💾 {{image.sizeImage}}</span>
+              <span>👤 {{ image.idClient }}</span>
+              <button *ngIf="menuimgvideo.userRole" (click)="deleteImg(image.id)">suprimer</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Boutons de navigation -->
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button class="nav-btn" (click)="previousPage()" [disabled]="currentPage === 0">
+          ← Précédent
+        </button>
+
+        <span class="page-info">
+          Page {{ currentPage + 1 }} / {{ totalPages }}
+        </span>
+
+        <button class="nav-btn" (click)="nextPage()" [disabled]="currentPage === totalPages - 1">
+          Suivant →
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Aucune image -->
+    <div *ngIf="!loading && videos.length === 0" class="empty">
+      <p>Aucune image trouvée</p>
+    </div>
+  </div>
+</div>

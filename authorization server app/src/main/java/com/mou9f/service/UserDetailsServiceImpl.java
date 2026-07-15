@@ -1,8 +1,11 @@
 package com.mou9f.service;
 
+import com.mou9f.entity.User;
+import com.mou9f.exceptions.SubscriptionExpiredException;
 import com.mou9f.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +18,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("user not exist"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+
+
     }
 }

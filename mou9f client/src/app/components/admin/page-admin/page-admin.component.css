@@ -1,0 +1,289 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    .card {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0;
+    }
+    .btn-test{
+      font-weight: 700;
+      padding:6px 23px ;
+      border: none;
+      color: #f3f3f3;
+      border-radius: 13px;
+      background-color: black;
+    }
+    .btn-active{
+      font-weight: 700;
+      padding:6px 23px ;
+      border: none;
+      color: #f3f3f3;
+      border-radius: 13px;
+      background-color: rgb(21, 145, 27);
+       .disactive{
+          display: none;
+        }
+    }
+    .btn-disactive{
+      font-weight: 700;
+      color: #f3f3f3;
+      border: none;
+      border-radius: 13px;
+      padding:6px 23px ;
+      background-color: rgb(255, 33, 4);
+          .active{
+            display: none;
+          }
+    }
+    .btn-active:hover{
+        background-color: rgb(9, 88, 13);
+        padding: 8px 23px;
+        border-radius: 17px;
+        cursor: pointer;
+        .active{
+          display: none;;
+        }
+        .disactive{
+          display: block;;
+        }
+
+    }
+    .btn-disactive:hover{
+        background-color: rgb(105, 22, 11);
+        padding: 8px 23px;
+        border-radius: 17px;
+        cursor: pointer;
+          .active{
+            display: block;
+          }
+          .disactive{
+            display: none;
+          }
+    }
+    .stats {
+      background: rgba(255,255,255,0.2);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Loading Spinner */
+    .loading {
+      text-align: center;
+      padding: 60px;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #667eea;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading p {
+      color: #666;
+      font-size: 1rem;
+    }
+
+    /* Error Message */
+    .error {
+      background: #fee;
+      color: #c33;
+      padding: 15px;
+      margin: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #c33;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .error-icon {
+      font-size: 1.2rem;
+    }
+
+    /* Table */
+    .table-responsive {
+      overflow-x: auto;
+      padding: 20px;
+    }
+
+    .client-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: white;
+    }
+
+    .client-table thead th {
+      background: #f8f9fa;
+      color: #333;
+      font-weight: 600;
+      padding: 15px;
+      text-align: left;
+      border-bottom: 2px solid #e9ecef;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .client-table tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    .client-table tbody tr:hover {
+      background: #f8f9fa;
+      transform: scale(1.01);
+    }
+
+    .client-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #e9ecef;
+      color: #555;
+    }
+
+    .badge {
+      /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+      color: rgb(122, 133, 192);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    /* No Data */
+    .no-data {
+      text-align: center;
+      padding: 60px;
+      color: #999;
+    }
+
+    .no-data-icon {
+      font-size: 4rem;
+      margin-bottom: 15px;
+    }
+
+    .no-data p {
+      font-size: 1.1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      .card-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .title {
+        font-size: 1.4rem;
+      }
+
+      /* Table en carte sur mobile */
+      .client-table thead {
+        display: none;
+      }
+
+      .client-table tbody tr {
+        display: block;
+        margin-bottom: 20px;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+
+      .client-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .client-table td:last-child {
+        border-bottom: none;
+      }
+
+      .client-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #667eea;
+        margin-right: 15px;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Scrollbar styling */
+    .table-responsive::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .table-responsive::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .table-responsive::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    .table-responsive::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }

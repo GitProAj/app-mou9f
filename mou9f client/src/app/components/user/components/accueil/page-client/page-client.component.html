@@ -1,0 +1,14 @@
+<div class="containers">
+    
+    <app-sidebar (showPageVideo)="show($event)" [menu]="menu"></app-sidebar>
+
+    <div *ngIf="menu.pageVideo">
+      <app-upload-video></app-upload-video>
+    </div>
+    <div *ngIf="menu.pageImage">
+      <app-upload-image></app-upload-image>
+    </div>
+    <div *ngIf="showimgvideo.showImage || showimgvideo.showVideo" > 
+          <app-page-images-videos [menuimgvideo]="showimgvideo"></app-page-images-videos>
+     </div>
+</div>

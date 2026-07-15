@@ -35,17 +35,12 @@
 			<artifactId>spring-cloud-starter-gateway</artifactId>
 		</dependency>
 
-		<!-- Serveur de Ressources OAuth2 (Validation JWT) -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-		</dependency>
-
-		<!-- Client OAuth2 (si la gateway se connecte à d'autres services) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
+
+		<!-- Client OAuth2 (si la gateway se connecte à d'autres services) -->
 
 		<!-- Sécurité Spring -->
 <!--		<dependency>-->
@@ -91,7 +86,10 @@
 			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>
 			<optional>true</optional>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 
 		<!-- Outils de développement -->
 		<dependency>

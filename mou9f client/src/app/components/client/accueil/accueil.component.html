@@ -1,0 +1,28 @@
+<div class="container-app">
+
+<header class="app-header">
+  <div class="header-container">
+    <!-- Logo/Brand -->
+    <div class="logo">
+      <a routerLink="/">
+        <img src="assets/logomou9f.png" alt="Logo">
+        <!-- <span>MOU9F</span> -->
+      </a>
+    </div>
+  
+
+    <!-- User Menu / Actions -->
+    <div class="user-actions">
+      
+      <div>
+        <button class="btn-login" (click)="login()">Login</button>
+        <button routerLink="/home/signup" class="btn-signup">Sign Up</button>
+      </div>
+    </div>
+
+  </div>
+</header>
+  <app-searchclient></app-searchclient>
+ <!-- <app-add-client *ngIf="signupshow"></app-add-client> -->
+</div>
+

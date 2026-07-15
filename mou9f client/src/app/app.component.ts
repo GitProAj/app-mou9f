@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { window } from 'rxjs';
-import { VideoServiceService } from './service/video-service.service';
+import { VedioService } from './components/user/service/vedio_service/vedio.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'mou9f-client';
   usern!:string;
   testt!:string;
-  constructor(private useratr:VideoServiceService){}
+  constructor(private useratr:VedioService){}
    
   isSidebarCollapsed = false;
 

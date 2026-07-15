@@ -16,10 +16,13 @@ public class ClientMou9f {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nom;
-    private String prenom;
-    private String adriss;
-    private long telephone;
+    private String firstname;
+    private String lastname;
+    private String username;
+    private String ville_activite;
+    private String lieut_activite;
+    private String phone;
     private String activite;
-    private String description;
+    private String status;
+
 }

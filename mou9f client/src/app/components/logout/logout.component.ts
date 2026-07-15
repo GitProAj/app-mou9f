@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Observable, window } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { filter } from 'rxjs';
-import { AuthontificationService } from 'src/app/service/authontification.service';
-// import { NavigationEnd ,ActivatedRoute } from '@angular/router';
+import { AuthserviceService } from '../auth/service/authservice.service'; 
+import { FormGroup,FormBuilder } from '@angular/forms';
+import { NavigationEnd ,ActivatedRoute } from '@angular/router';
+import { LoginRequest } from '../auth/model/LoginRequest';
 
 @Component({
   selector: 'app-logout',
@@ -11,42 +14,18 @@ import { AuthontificationService } from 'src/app/service/authontification.servic
   styleUrls: ['./logout.component.css']
 })
 
-export class LogoutComponent implements OnInit {
-  username: string | null = null;
-  loading = false;
-  isLoggedOut = false;
-  
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {}
-  
-  ngOnInit() {
- 
-  }
-  
-  logout() {    
-    this.http.get<any>('/api/auth/logout')
-      .subscribe({
-        next: (response) => {
-          this.isLoggedOut = true;
-          setTimeout(() => {
-            window.location.href = response.logoutUrl;
-          }, 1500);
-          console.log("responseeeeeeeeee",response)
-        },
-        error: (error) => {
-          console.error('Logout failed', error);
-          this.loading = false;
-          // alert('Erreur lors de la déconnexion');
-          alert(error.message);
 
-        }
-      });
+export class LogoutComponent implements OnInit {
+
+
+  ngOnInit() {
+    
+     location.href = '/oauth2/authorization/gateway';
   }
-  
-  cancel() {
-    this.router.navigate(['/']);
-  }
+
+ 
 }
 
+
+
+ 

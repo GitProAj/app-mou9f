@@ -1,0 +1,164 @@
+<div class="container">
+    <div class="filters-header">
+        <h1>
+            <span class="header-icon">📍</span>
+            Filtrage des Clients
+        </h1>
+    </div>
+    
+    <!-- Zone de filtres -->
+    <div class="filters-card">
+      
+        
+        <div class="filters-body">
+            <!-- Sélection activité -->
+            <div class="filter-group" [class.active]="filtres.activite">
+                <label class="filter-label">
+                    <span class="label-icon">🏢</span>
+                    <span class="label-text">Activité</span>
+                </label>
+                <div class="select-wrapper">
+                    <select 
+                        [(ngModel)]="filtres.activite"
+                        (change)="onActiviteChange()"
+                        class="form-control"
+                        aria-label="Sélectionner une activité">
+                        <option value="">-- Toutes les activités --</option>
+                        <option *ngFor="let activite of activites" [value]="activite">
+                            {{ activite }}
+                        </option>
+                    </select>
+                    <span class="select-arrow" aria-hidden="true">▼</span>
+                </div>
+            </div>
+            
+            <!-- Sélection ville (apparaît après choix activité) -->
+            <div class="filter-group" *ngIf="villes.length > 0 || filtres?.ville" [class.active]="filtres.ville">
+                <label class="filter-label">
+                    <span class="label-icon">🌆</span>
+                    <span class="label-text">Ville</span>
+                </label>
+                <div class="select-wrapper">
+                    <select 
+                        [(ngModel)]="filtres.ville"
+                        (change)="onVilleChange()"
+                        class="form-control"
+                        aria-label="Sélectionner une ville">
+                        <option value="">-- Toutes les villes --</option>
+                        <option *ngFor="let ville of villes" [value]="ville">
+                            {{ ville }}
+                        </option>
+                    </select>
+                    <span class="select-arrow" aria-hidden="true">▼</span>
+                </div>
+             
+            </div>
+            
+            <!-- Sélection lieu (apparaît après choix ville) -->
+            <div class="filter-group" *ngIf="lieux.length > 0 || filtres?.lieu  || showLieux" [class.active]="filtres.lieu">
+                <label class="filter-label">
+                    <span class="label-icon">📍</span>
+                    <span class="label-text">Lieu d'activité</span>
+                </label>
+                <div class="select-wrapper">
+                    <select 
+                        [(ngModel)]="filtres.lieu"
+                        (change)="onLieuChange()"
+                        class="form-control"
+                        aria-label="Sélectionner un lieu">
+                        <option value="">-- Tous les lieux --</option>
+                        <option *ngFor="let lieu of lieux" [value]="lieu">
+                            {{ lieu }}
+                        </option>
+                    </select>
+                    <span class="select-arrow" aria-hidden="true">▼</span>
+                </div>
+       
+            </div>
+        </div>
+        <div class="btn-reset-group">
+            <button 
+                *ngIf="hasActiveFilters" 
+                (click)="resetFilters()"
+                class="btn-reset"
+                aria-label="Réinitialiser tous les filtres">
+                <svg class="reset-icon" viewBox="0 0 24 24" width="16" height="16">
+                    <path fill="currentColor" d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                </svg>
+                Réinitialiser tous les filtres
+            </button>
+        </div>           
+        
+    </div>
+    <!-- Résultats du filtrage -->
+    <div class="results-card">
+        <div class="results-header">
+            <h2>📋 Résultats</h2>
+            <span class="filter-badge">{{ getCurrentFilterLabel() }}</span>
+            <span class="count-badge">{{ clientsFiltres.length }} client(s)</span>
+        </div>
+        
+        <!-- Chargement -->
+        <div *ngIf="isLoading" class="loading">
+            <div class="spinner"></div>
+            <p>Chargement des données...</p>
+        </div>
+        
+        <!-- Liste des clients -->
+        <div *ngIf="!isLoading && clientsFiltres.length > 0" class="clients-grid">
+            <div *ngFor="let client of clientsFiltres" class="client-card">
+                <a class="link-client" [routerLink]="['/home/detail/client', client.id]">
+
+                    <div class="client-header">
+                        <div class="client-avatar">👤</div>
+                        <div class="client-name">
+                            <h3>{{ client.firstname }} {{ client.lastname }}</h3>
+                            <p>@{{ client.username }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="client-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">🏢</span>
+                            <span class="detail-label">Activité:</span>
+                            <span class="detail-value">{{ client.activite }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">🌆</span>
+                            <span class="detail-label">Ville:</span>
+                            <span class="detail-value highlight">{{ client.ville_activite }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-label">Lieu:</span>
+                            <span class="detail-value">{{ client.lieut_activite }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">📞</span>
+                            <span class="detail-label">Téléphone:</span>
+                            <span class="detail-value">{{ client.phone }}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Aucun résultat -->
+        <div *ngIf="!isLoading && clientsFiltres.length === 0 && (filtres.activite || filtres.ville || filtres.lieu)" 
+             class="no-results">
+            <div class="no-results-icon">😕</div>
+            <h3>Aucun client trouvé</h3>
+            <p>Aucun client ne correspond aux critères sélectionnés</p>
+            <button (click)="resetFilters()" class="btn-link">Voir tous les clients</button>
+        </div>
+        
+        <!-- Message initial -->
+        <div *ngIf="!isLoading && clientsFiltres.length === 0 && !filtres.activite && !filtres.ville && !filtres.lieu" 
+             class="initial-message">
+            <div class="initial-icon">🔍</div>
+            <h3>Sélectionnez des critères</h3>
+            <p>Choisissez une activité, une ville et un lieu pour filtrer les clients</p>
+        </div>
+    </div>
+</div>
+
