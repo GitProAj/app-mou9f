@@ -19,25 +19,6 @@ public class FeignRequestUser {
 //    UserRepository userRepository;
     @Autowired
     ServiceFeignUser serviceFeignUser;
-//    @Autowired
-//    UserOperation userOperation;
-//
-//    @PostMapping("/adduser")
-//    public ResponseEntity<UserResponse> addUser(@RequestBody UserDto userDto){
-//        return  ResponseEntity.status(HttpStatus.CREATED)
-//                .body(userOperation.createUser(userDto));
-//    }
-//
-//    @DeleteMapping("/delete/{username}")
-//    public ResponseEntity<HttpStatus> deleteUser(@PathVariable String username){
-//        try {
-//            userRepository.deleteByUsername(username);
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-//
     @GetMapping("/getUsers")
     public Set<UserResponseDto> getUser(){
             return  serviceFeignUser.getUsers();

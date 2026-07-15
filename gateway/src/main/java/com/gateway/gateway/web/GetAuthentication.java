@@ -37,14 +37,5 @@ public class GetAuthentication {
         return null;
     }
 
-    @GetMapping("/getToken")
-    private Map<String,OidcUser> extractIdToken(@AuthenticationPrincipal OidcUser user) {
-        if (user != null) {
-            // Pour OIDC
-           return Map.of("userinfo",user);
-            //return user.getIdToken()
-        }
-        return Map.of("user non othentifie",null);
-    }
 
 }

@@ -52,35 +52,12 @@ public class UserController {
         }
     }
 
-
     @PostMapping("/register")
     public ResponseEntity<MessageDto> addClient(@RequestBody ClientDto clientDto){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(operationClient.createClient(clientDto));
     }
 
-    @GetMapping("/user9000")
-    public Map<String,MessageDto> test(Authentication authentication){
-        return  Map.of("9000 server authorization",new MessageDto(authentication.getName()));
-    }
-//    @GetMapping("/logout")
-    public void logoutSession(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.logout(
-                ses->{
-                    ses
-//                          .logoutSuccessUrl("/logout")
-                            .deleteCookies("JSESSIONID")
-                            .invalidateHttpSession(true)
-                            .clearAuthentication(true);
-                }
-        );
-//        return ResponseEntity.ok("louged out");
-    }
 
-    @GetMapping("/auth")
-    public Map<String,Object> logoutSession(Authentication authentication) throws Exception {
-
-        return Map.of("auth",authentication);
-    }
 
 }

@@ -11,9 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface ClientMou9fRepository extends JpaRepository<ClientMou9f,Long> {
-//  List<ClientMou9f> findByTitreContainingIgnoreCase(String titre);
-//    List<ClientMou9f> findByVille_activiteAndLieut_activiteAndActivite(String ville, String lieut , String activite);
-//    List<ClientMou9f> findByVille_activiteAndActivite(String ville , String activite);
+
     Optional<ClientMou9f> findByUsername(String username);
     List<ClientMou9f> findByActivite( String activite );
 
@@ -26,22 +24,12 @@ public interface ClientMou9fRepository extends JpaRepository<ClientMou9f,Long> {
             "AND c.ville_activite IS NOT NULL")
     List<String> findDistinctVillesByActivite(@Param("activite") String activite);
 
-//    @Query("SELECT DISTINCT c.lieut_activite FROM ClientMou9f c " +
-//            "WHERE c.activite=:activite " +
-//            "AND c.ville_activite=:ville " +
-//            "AND c.lieut_activite IS NOT NULL")
-//    List<String> findDistinctLieutByActivite(@Param("activite") String activite, @Param("ville") String ville);
+
     @Query("SELECT DISTINCT c FROM ClientMou9f c " +
             "WHERE c.activite=:activite " +
             "AND c.ville_activite=:ville " +
             "AND c.lieut_activite IS NOT NULL")
     List<ClientMou9f> findDistinctClientByActiviteAndVille(@Param("activite") String activite, @Param("ville") String ville);
 
-//    @Query("SELECT DISTINCT c FROM ClientMou9f c " +
-//            "WHERE c.activite=:activite " +
-//            "AND c.ville_activite=:ville " +
-//            "AND c.lieut_activite=:lieut  " +
-//            "AND c IS NOT NULL")
-//    List<ClientMou9f> findDistinctClientFilter(@Param("activite") String activite, @Param("ville") String ville, @Param("lieut") String lieut);
 
 }

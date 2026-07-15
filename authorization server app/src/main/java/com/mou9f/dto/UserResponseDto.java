@@ -23,35 +23,6 @@ public class UserResponseDto {
     private boolean trialPeriod;
     private LocalDateTime trialEndDate;
 
-//                public boolean isEnabled() {
-//                        return enabled && isSubscriptionValid();
-//                }
-//
-//                public boolean isSubscriptionValid() {
-//                        if (!subscriptionActive) return false;
-//
-//                        if (trialPeriod && trialEndDate != null) {
-//                                return LocalDateTime.now().isBefore(trialEndDate);
-//                        }
-//
-//                        if (subscriptionEndDate != null) {
-//                                return LocalDateTime.now().isBefore(subscriptionEndDate);
-//                        }
-//
-//                        return false;
-//                }
-
-//    public boolean hasAccessToFeature(String feature) {
-//        if (!isSubscriptionValid()) return false;
-//
-//        return switch (subscriptionPlan) {
-//            case "BASIC" -> Set.of("read", "basic").contains(feature);
-//            case "PREMIUM" -> Set.of("read", "write", "premium").contains(feature);
-//            case "ENTERPRISE" -> true;
-//            default -> false;
-//        };
-//    }
-
         }
 
 

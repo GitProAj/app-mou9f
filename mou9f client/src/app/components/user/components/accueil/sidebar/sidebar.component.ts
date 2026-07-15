@@ -2,7 +2,7 @@
 // advanced-sidebar.component.ts
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
-import { AuthserviceService } from '../../../../auth/service/authservice.service'; 
+import { AuthserviceService } from '../../../../auth/service/authservice.service';
 import { Route, Router } from '@angular/router';
 import { HostListener } from '@angular/core';
 
@@ -17,7 +17,7 @@ import { HostListener } from '@angular/core';
 
 export class SidebarComponent implements OnInit {
   isCollapsed=false;
-  @Input() menu = 
+  @Input() menu =
     {
       pageVideo:false,
       pageImage:false,
@@ -25,20 +25,14 @@ export class SidebarComponent implements OnInit {
       pageAficherImages:false,
       pageAficherVideos:false,
       pageSettings:false
-      
+
 
     };
   @Output() showPageVideo = new EventEmitter<any>();
 
-  // public showimgvideo = 
-  //   {
-  //     showVideo:false,
-  //     showImage:false,
-  //   };
-
   dropdownOpen = false;
 
- 
+
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
@@ -55,52 +49,52 @@ export class SidebarComponent implements OnInit {
   }
   // Menu items array
   menuItems = [
-    { 
+    {
       class: 'fas fa-video',
-      label: 'Add Video', 
-      image: 'video-calling.png', 
+      label: 'Add Video',
+      image: 'video-calling.png',
       link: '/video',
-      active: false 
+      active: false
     },
-      { 
+      {
       class: 'fas fa-image',
-      label: 'Add Image', 
-      image: 'camera.png', 
+      label: 'Add Image',
+      image: 'camera.png',
       link: '/image',
-      active: false 
+      active: false
     },
-    { 
+    {
       class: 'fas fa-chart-pie',
-      label: 'Dashboard', 
-      image: 'data.png', 
+      label: 'Dashboard',
+      image: 'data.png',
       link: '/dashboard',
       active: false,
     },
-    { 
+    {
       class: 'fas fa-images',
-      label: 'Get Images', 
-      image: 'management.png', 
+      label: 'Get Images',
+      image: 'management.png',
       link: '/getImages',
-      active: false 
+      active: false
     },
-     { 
+     {
       class: 'fas fa-film',
-      label: 'Get Videos', 
-      image: 'management.png', 
+      label: 'Get Videos',
+      image: 'management.png',
       link: '/getVideos',
       active: false,
     },
-    { 
+    {
       class: 'fas fa-sliders-h',
-      label: 'Settings', 
-      image: 'parametres.png', 
+      label: 'Settings',
+      image: 'parametres.png',
       link: '/settings',
-      active: false 
+      active: false
     }
-   
-  ]; 
- 
-  constructor( 
+
+  ];
+
+  constructor(
             private auth:AuthserviceService,
             private http:HttpClient,
             private router:Router,
@@ -115,9 +109,9 @@ export class SidebarComponent implements OnInit {
   setActive(item: any): void {
 
     this.menuItems.forEach(menuItem => menuItem.active = false);
-    
+
       this.menu.pageVideo=false;
-      this.menu.pageImage=false;      
+      this.menu.pageImage=false;
       this.menu.pageDashboard=false;
       this.menu.pageAficherImages=false;
       this.menu.pageAficherVideos=false;
@@ -146,9 +140,4 @@ logout(){
   location.href = "/pageLogout"
 }
 
-
-
-
-
-  // Fermer le menu avec la touche Échap
 }

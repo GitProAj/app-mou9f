@@ -67,78 +67,15 @@ public class AuthorizationServerSecurity {
                         .requestMatchers("/static/**", "/webjars/**", "/favicon.ico","/css/**").permitAll()
                         .anyRequest().authenticated()
                 )
-//              .csrf(c->c.ignoringRequestMatchers("/auth/**","/client/**","/adduser"))
-//                .formLogin(form -> form
-//                        .loginPage("/login")
-//                )
                 .formLogin(form -> form
                         .loginPage("/login"))
-//                        .loginProcessingUrl("/authLogin")
-//                        .usernameParameter("username")
-//                        .passwordParameter("password")
-//                        .successHandler(new AuthenticationSuccessHandler() {
-//                            @Override
-//                            public void onAuthenticationSuccess(HttpServletRequest request,
-//                                                                HttpServletResponse response,
-//                                                                Authentication authentication)
-//                                    throws IOException {
-//
-//                                response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8081");
-//                                response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:4200");
-//                                response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-//                                response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
-//                                response.setHeader("Access-Control-Allow-Credentials", "true");
-//                                response.setHeader("Access-Control-Max-Age", "3600");
-//
-//                                response.setStatus(HttpServletResponse.SC_OK);
-//                                response.setContentType("application/json");
-//                                response.getWriter().write("{\"status\":\"success\"}");
-//                                response.sendRedirect("http://127.0.0.1:8081/home/client");
-//                            }
-//                        })
-//                        .failureHandler(new AuthenticationFailureHandler() {
-//                            @Override
-//                            public void onAuthenticationFailure(HttpServletRequest request,
-//                                                                HttpServletResponse response,
-//                                                                AuthenticationException exception)
-//                                    throws IOException {
-//                                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                                response.setContentType("application/json");
-//                                response.getWriter().write("{\"status\":\"error\",\"message\":\"" +
-//                                        exception.getMessage() + "\"}");
-//                            }
-//                        }).permitAll()
-//
-//                        .defaultSuccessUrl("http://127.0.0.1:8081/home/client", true).permitAll()
-//                        )
-
-//                        .failureUrl("http://127.0.0.1:8081/home/login?error=true")
-//                        .permitAll()
                 .logout(logout->
                     logout
                             .logoutUrl("/logout")
-//                            .logoutSuccessUrl("http://127.0.0.1:8081/home/accueil")
-//                            .deleteCookies("JSESSIONID")
-//                            .invalidateHttpSession(true)
-//                            .clearAuthentication(true)
                 )
                 .oauth2ResourceServer(rs->rs.jwt(withDefaults()));
                 return   http.build();
     }
-
-//   @Bean
-//    public CorsConfigurationSource corsConfigurationSource(){
-//
-//        CorsConfiguration configuration=new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("http://127.0.0.1:4200","http://127.0.0.1:8081","http://localhost:8081"));
-//        configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH","PUT","DELETE"));
-//        configuration.addAllowedHeader("*");
-//        configuration.setAllowCredentials(true);
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//
-//    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

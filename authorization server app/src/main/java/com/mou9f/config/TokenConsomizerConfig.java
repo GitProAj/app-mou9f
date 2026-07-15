@@ -34,18 +34,4 @@ public class TokenConsomizerConfig {
         };
     }
 
-//    @Bean
-//    public OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizers() {
-//        return context -> {
-//            User user = (User) context.getPrincipal().getPrincipal();
-//
-//            context.getClaims().claims(claims -> {
-//                claims.put("subscription_status", user.getSubscriptionStatus().name());
-//                claims.put("subscription_end_date", user.getSubscriptionEndDate());
-//                claims.put("username", user.getUsername());
-//                claims.put("user_id", user.getId());
-//            });
-//        };
-//    }
-
 }

@@ -22,26 +22,7 @@ public class OperationClient {
     private ClientMou9fRepository clientMou9fRepository;
     @Autowired
     private AuthorizationFeign authorizationFeign;
-    public MessageDto addClient(ClientMou9fDto clientDto){
 
-            Optional<ClientMou9f> existingClient = clientMou9fRepository.findByUsername(clientDto.username());
-            if (existingClient.isPresent()) {
-                return new MessageDto("not added","");
-            }else{
-                // Si tout est OK, ajouter le client
-                ClientMou9f client = new ClientMou9f();
-                client.setFirstname(clientDto.firstname());
-                client.setLastname(clientDto.lastname());
-                client.setUsername(clientDto.username());
-                client.setVille_activite(clientDto.ville_activite());
-                client.setLieut_activite(clientDto.lieut_activite());
-                client.setPhone(clientDto.phone());
-                client.setActivite(clientDto.activite());
-                ClientMou9f savedClient = clientMou9fRepository.save(client);
-                return new MessageDto("client added","");
-            }
-
-       }
     public List<ClientResponseDto> getAllClient() {
         List<ClientResponseDto> clients = clientMou9fRepository.findAll()
                                             .stream()
@@ -83,13 +64,6 @@ public class OperationClient {
          return authorizationFeign.getUsers()
                  .stream()
                  .filter(userResponseDto -> {
-//                     return (userResponseDto.isSubscriptionActive() &&
-//                             userResponseDto.getSubscriptionEndDate() != null &&
-//                             LocalDateTime.now().isBefore(userResponseDto.getSubscriptionEndDate()))
-//                             ||
-//                             (userResponseDto.isTrialPeriod() &&
-//                                     userResponseDto.getTrialEndDate() != null &&
-//                                     LocalDateTime.now().isBefore(userResponseDto.getTrialEndDate()));
                      return this.isSubscriptionValid(userResponseDto);
                  })
                  .flatMap(userResponseDto -> {

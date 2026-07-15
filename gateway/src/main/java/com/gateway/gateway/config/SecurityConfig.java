@@ -71,18 +71,8 @@ public class SecurityConfig {
                         .anyExchange().authenticated()
                 )
                 .csrf(c->c.disable())
-//                .oauth2Login(
-//                        log->log
-//                                .authorizationRequestResolver(resolver))
                 .oauth2Login(oauth2 -> oauth2
-                             // Configuration du client OAuth2
                         .authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("/home/client"))
-//                        .authenticationFailureHandler((exchange, exception) -> {
-//                            exchange.getExchange().getResponse().setStatusCode(HttpStatus.FOUND);
-//                            exchange.getExchange().getResponse().getHeaders()
-//                                    .setLocation(URI.create("http://localhost:4200/login?error=true"));
-//                            return Mono.empty();
-//                        })
                 )
                 .logout(
                             (logout) -> logout
@@ -97,12 +87,5 @@ public class SecurityConfig {
         oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://127.0.0.1:8081/home/accueil");
         return oidcLogoutSuccessHandler;
     }
-
-//    @Bean
-//    ServerOAuth2AuthorizationRequestResolver pkceResolver(ReactiveClientRegistrationRepository repo) {
-//        var resolver = new DefaultServerOAuth2AuthorizationRequestResolver(repo);
-//        resolver.setAuthorizationRequestCustomizer(OAuth2AuthorizationRequestCustomizers.withPkce());
-//        return resolver;
-//    }
 
 }

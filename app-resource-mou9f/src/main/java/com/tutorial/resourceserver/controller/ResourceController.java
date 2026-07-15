@@ -26,8 +26,6 @@ public class ResourceController {
     @Autowired
     private AuthorizationFeign authorizationFeign;
     @Autowired
-    private SershCategory sershCategory;
-    @Autowired
     private OperationClient operationClient;
     @Autowired
     private ClientService clientService;
@@ -37,10 +35,7 @@ public class ResourceController {
     private OperationVideo operationVideo;
     @Autowired
     private ClientMou9fRepository clientMou9fRepository;
-//    @GetMapping("/user")
-//    public ResponseEntity<MessageDto> user(Authentication authentication){
-//        return ResponseEntity.ok(new MessageDto("Hello " + authentication.getName()));
-//    }
+
     @GetMapping("/user")
     public Map<String,String> user(Authentication authentication){
         return Map.of("Hello " , authentication.getName());
@@ -50,16 +45,7 @@ public class ResourceController {
     public Map<String,String> admin(Authentication authentication){
         return Map.of("Hello " , authentication.getName());
     }
-//
-//    @GetMapping("/admin")
-//    @PreAuthorize("hasAuthority('ADMIN')")
-//    public ResponseEntity<MessageDto> admin(Authentication authentication){
-//        return ResponseEntity.ok(new MessageDto("Hello Mr. " + authentication.getName()));
-//    }
-    @GetMapping("/searchClients")
-    public ResponseEntity<List<ClientMou9f>> searchClient(@PathVariable String activite){
-      return ResponseEntity.status(HttpStatus.CREATED).body(sershCategory.searchClient(activite));
-    }
+
     @PostMapping("/addClient")
     public ResponseEntity<MessageDto> addClient(@RequestBody ClientDto clientDto){
          MessageDto messageDto = null;
@@ -85,14 +71,7 @@ public class ResourceController {
     public ResponseEntity<List<String>> getVillesByActivite(@RequestParam String activite) {
         return ResponseEntity.ok(clientMou9fRepository.findDistinctVillesByActivite(activite));
     }
-    // 3. Récupérer les lieux par activité et ville
-//    @GetMapping("/lieux")
-//    public List<String> getLieuxByActiviteAndVille(
-//            @RequestParam String activite,
-//            @RequestParam String ville) {
-//        return operationClient.clientMou9fFilter(activite, ville);
-//    }
-    // 4. Récupérer les clients filtrés
+
     @GetMapping("/clients")
     public Set<ClientResponseDto> getClientsByFilters(
             @RequestParam String activite,

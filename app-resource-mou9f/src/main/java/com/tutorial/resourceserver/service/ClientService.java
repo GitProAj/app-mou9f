@@ -73,10 +73,6 @@ public class ClientService {
 //                   throw new RuntimeException("Échec de création de l'utilisateur");
                 }
             } catch (TransactionException e) {
- //                Compensation: Supprimer le client local
-//                supprimer le client avec applicationEventPublisher
-//                TransactionFailedEvent trComt = new TransactionFailedEvent(this,savedClient,"Echoc de creation un client");
-//                applicationEventPublisher.publishEvent(trComt);
                 logger.error("Erreur lors de la création de l'utilisateur: {}", e.getMessage());
                 clientRepository.delete(savedClient);
                 return new MessageDto("","Erreur lors de la création de l'utilisateur: {} "+ e.getMessage());

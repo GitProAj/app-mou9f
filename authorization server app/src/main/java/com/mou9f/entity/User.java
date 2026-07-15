@@ -1,6 +1,5 @@
 package com.mou9f.entity;
 
-import com.mou9f.enums.SubscriptionStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
-
-import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.enabled;
 
 
 @Entity
@@ -81,7 +78,6 @@ public class User implements UserDetails {
     public boolean isAccountNonLocked() {
         return !locked;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return !credentialExpired;
@@ -91,9 +87,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
-//    // Gestion de l'abonnement
-//    @Column(nullable = false)
-//    private boolean subscriptionActive = false;
     @Column
     private LocalDateTime subscriptionStartDate;
     @Column

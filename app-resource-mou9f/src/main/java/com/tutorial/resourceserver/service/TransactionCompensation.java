@@ -25,7 +25,6 @@ public class TransactionCompensation {
     @Async
     public void handleTransactionFailure(TransactionFailedEvent event) {
         ClientMou9f client = event.getClient();
-
         // Compensation: Supprimer le client
         if (client.getUsername() != null) {
             try {
@@ -35,7 +34,6 @@ public class TransactionCompensation {
                 logger.error("Erreur lors de la suppression de l'utilisateur: {}", e.getMessage());
             }
         }
-
         clientRepository.delete(client);
     }
 }
